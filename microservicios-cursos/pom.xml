@@ -40,7 +40,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.microservicios.app.microservicios.commons.alumnos</groupId>
+			<groupId>com.microservicios.app.common.alumnos</groupId>
 			<artifactId>common-alumnos</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

@@ -21,9 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.microservicios.app.usuarios.models.services.AlumnoService;
-
+import com.microservicios.app.common.alumnos.models.entity.Alumno;
 import com.microservicios.app.commons.controllers.CommonController;
-import com.microservicios.app.microservicios.commons.alumnos.models.entity.Alumno;
 
 @RestController
 public class AlumnoController extends CommonController<Alumno, AlumnoService> {

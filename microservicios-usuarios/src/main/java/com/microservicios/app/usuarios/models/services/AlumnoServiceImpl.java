@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.microservicios.app.common.alumnos.models.entity.Alumno;
 import com.microservicios.app.commons.services.CommonServiceImpl;
-import com.microservicios.app.microservicios.commons.alumnos.models.entity.Alumno;
 import com.microservicios.app.usuarios.models.repository.AlumnnoRepository;
 
 @Service

@@ -1,4 +1,4 @@
-package com.microservicios.app.microservicios.commons.alumnos.models.entity;
+package com.microservicios.app.common.alumnos.models.entity;
 
 import java.util.Date;
 

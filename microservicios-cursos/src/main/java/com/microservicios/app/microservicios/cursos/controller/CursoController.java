@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.microservicios.app.common.alumnos.models.entity.Alumno;
 import com.microservicios.app.common.examenes.models.entity.Examen;
 import com.microservicios.app.commons.controllers.CommonController;
-import com.microservicios.app.microservicios.commons.alumnos.models.entity.Alumno;
 import com.microservicios.app.microservicios.cursos.models.entity.Curso;
 import com.microservicios.app.microservicios.cursos.services.CursoService;
 

@@ -18,8 +18,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
+import com.microservicios.app.common.alumnos.models.entity.Alumno;
 import com.microservicios.app.common.examenes.models.entity.Examen;
-import com.microservicios.app.microservicios.commons.alumnos.models.entity.Alumno;
 
 @Entity
 @Table(name = "cursos")
