@@ -6,26 +6,30 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.microservicios.app.common.alumnos.models.entity.Alumno;
 import com.microservicios.app.common.examenes.models.entity.Pregunta;
 
 @Entity
-@Table(name="respuestas")
+@Table(name = "respuestas")
 public class Respuesta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String texto;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+
+	// @ManyToOne(fetch = FetchType.LAZY)
+	@Transient
 	private Alumno alumno;
-	
+
+	@Column(name = "alumno_id")
+	private Long alumnoId;
+
 	@OneToOne(fetch = FetchType.LAZY)
 	private Pregunta pregunta;
 
@@ -60,6 +64,13 @@ public class Respuesta {
 	public void setPregunta(Pregunta pregunta) {
 		this.pregunta = pregunta;
 	}
-	
-	
+
+	public Long getAlumnoId() {
+		return alumnoId;
+	}
+
+	public void setAlumnoId(Long alumnoId) {
+		this.alumnoId = alumnoId;
+	}
+
 }

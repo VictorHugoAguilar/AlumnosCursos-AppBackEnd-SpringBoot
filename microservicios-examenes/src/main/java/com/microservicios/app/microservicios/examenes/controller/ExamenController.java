@@ -21,35 +21,37 @@ import com.microservicios.app.microservicios.examenes.services.ExamenService;
 public class ExamenController extends CommonController<Examen, ExamenService> {
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> editar(@Valid @RequestBody Examen examen, BindingResult result, @PathVariable Long id) {
-
-		if (result.hasErrors()) {
+	public ResponseEntity<?> editar(@Valid @RequestBody Examen examen, BindingResult result, @PathVariable Long id){
+		
+		if(result.hasErrors()) {
 			return this.validar(result);
 		}
-
+		
 		Optional<Examen> o = service.findById(id);
-
-		if (!o.isPresent()) {
+		
+		if(!o.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 		Examen examenDb = o.get();
 		examenDb.setNombre(examen.getNombre());
-
-		examenDb.getPreguntas().stream().filter(pdb -> !examen.getPreguntas().contains(pdb))
-				.forEach(examenDb::removePregunta);
-
+		
+		examenDb.getPreguntas()
+		.stream()
+		.filter(pdb -> !examen.getPreguntas().contains(pdb))
+		.forEach(examenDb::removePregunta);
+		
 		examenDb.setPreguntas(examen.getPreguntas());
-
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(examenDb));
 	}
-
+	
 	@GetMapping("/filtrar/{term}")
-	public ResponseEntity<?> filtrar(@PathVariable String term) {
+	public ResponseEntity<?> filtrar(@PathVariable String term){
 		return ResponseEntity.ok(service.findByNombre(term));
 	}
-
+	
 	@GetMapping("/asignaturas")
-	public ResponseEntity<?> listarAsignaturas() {
+	public ResponseEntity<?> listarAsignaturas(){
 		return ResponseEntity.ok(service.findAllAsignaturas());
 	}
 

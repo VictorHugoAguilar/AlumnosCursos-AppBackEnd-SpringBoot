@@ -40,11 +40,12 @@ public class Examen {
 	@Column(name="create_at")
 	private Date createAt;
 	
-	@JsonIgnoreProperties(value = {"examen"}, allowSetters = true)
+	@JsonIgnoreProperties(value = {"examen", "handler", "hibernateLazyInitializer"}, allowSetters = true)
 	@OneToMany(mappedBy = "examen", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Pregunta> preguntas;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties(value= {"handler", "hibernateLazyInitializer"})
 	@NotNull
 	private Asignatura asignatura;
 	

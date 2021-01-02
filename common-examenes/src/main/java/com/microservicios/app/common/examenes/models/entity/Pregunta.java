@@ -22,7 +22,7 @@ public class Pregunta {
 	
 	private String texto;
 	
-	@JsonIgnoreProperties(value = {"preguntas"})
+	@JsonIgnoreProperties(value = {"preguntas", "handler", "hibernateLazyInitializer"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="examen_id")
 	private Examen examen;

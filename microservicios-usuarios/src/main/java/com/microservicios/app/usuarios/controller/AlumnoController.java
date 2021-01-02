@@ -1,6 +1,7 @@
 package com.microservicios.app.usuarios.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -26,6 +27,11 @@ import com.microservicios.app.commons.controllers.CommonController;
 
 @RestController
 public class AlumnoController extends CommonController<Alumno, AlumnoService> {
+
+	@GetMapping("/alumnos-por-curso")
+	public ResponseEntity<?> obtenerAlumnosPorCurso(@RequestParam List<Long> ids) {
+		return ResponseEntity.ok(service.findAllByIds(ids));
+	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<?> editar(@Valid @RequestBody Alumno alumno, BindingResult result, @PathVariable Long id) {
