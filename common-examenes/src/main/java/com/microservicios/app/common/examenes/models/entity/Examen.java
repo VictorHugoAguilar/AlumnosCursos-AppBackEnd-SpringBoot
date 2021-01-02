@@ -20,33 +20,34 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "examenes")
+@Table(name="examenes")
 public class Examen {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@NotEmpty
-	@Column(name = "nombre")
+	@Size(min = 4, max=30)
 	private String nombre;
-
+	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_at")
+	@Column(name="create_at")
 	private Date createAt;
-
-	@JsonIgnoreProperties(value = { "examen" }, allowSetters = true)
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "examen")
+	
+	@JsonIgnoreProperties(value = {"examen"}, allowSetters = true)
+	@OneToMany(mappedBy = "examen", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Pregunta> preguntas;
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@NotNull
 	private Asignatura asignatura;
-
+	
 	@Transient
 	private boolean respondido;
 
@@ -58,7 +59,7 @@ public class Examen {
 	public void prePersist() {
 		this.createAt = new Date();
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -89,15 +90,16 @@ public class Examen {
 
 	public void setPreguntas(List<Pregunta> preguntas) {
 		this.preguntas.clear();
-		preguntas.forEach(p -> this.addPreguntas(p));
+		preguntas.forEach(this::addPregunta);
+		
 	}
-
-	public void addPreguntas(Pregunta pregunta) {
+	
+	public void addPregunta(Pregunta pregunta) {
 		this.preguntas.add(pregunta);
 		pregunta.setExamen(this);
 	}
 
-	public void removePreguntas(Pregunta pregunta) {
+	public void removePregunta(Pregunta pregunta) {
 		this.preguntas.remove(pregunta);
 		pregunta.setExamen(null);
 	}
@@ -120,17 +122,18 @@ public class Examen {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if(this == obj) {
 			return true;
 		}
-
-		if (!(obj instanceof Examen)) {
+		
+		if(!(obj instanceof Examen)) {
 			return false;
 		}
 
-		Examen e = (Examen) obj;
-
-		return this.id != null && this.id.equals(e.getId());
+		Examen a = (Examen) obj;
+		
+		return this.id != null && this.id.equals(a.getId());
 	}
-
+	
+	
 }

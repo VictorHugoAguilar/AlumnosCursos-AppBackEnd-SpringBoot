@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,10 +22,10 @@ public class Asignatura {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "nombre")
+
 	private String nombre;
 
-	@JsonIgnoreProperties(value = { "hijos" }, allowSetters = true)
+	@JsonIgnoreProperties(value = { "hijos" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Asignatura padre;
 

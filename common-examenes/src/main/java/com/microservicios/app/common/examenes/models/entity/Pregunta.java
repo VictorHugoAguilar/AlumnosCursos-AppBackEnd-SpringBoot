@@ -1,6 +1,5 @@
 package com.microservicios.app.common.examenes.models.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,20 +11,20 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 @Entity
-@Table(name = "preguntas")
+@Table(name="preguntas")
 public class Pregunta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "texto")
+	
 	private String texto;
-
-	@JsonIgnoreProperties(value = { "preguntas" })
+	
+	@JsonIgnoreProperties(value = {"preguntas"})
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "examen_id")
+	@JoinColumn(name="examen_id")
 	private Examen examen;
 
 	public Long getId() {
@@ -54,17 +53,18 @@ public class Pregunta {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if(this == obj) {
 			return true;
 		}
-
-		if (!(obj instanceof Pregunta)) {
+		
+		if(!(obj instanceof Pregunta)) {
 			return false;
 		}
 
-		Pregunta p = (Pregunta) obj;
-
-		return this.id != null && this.id.equals(p.getId());
+		Pregunta a = (Pregunta) obj;
+		
+		return this.id != null && this.id.equals(a.getId());
 	}
-
+	
+	
 }

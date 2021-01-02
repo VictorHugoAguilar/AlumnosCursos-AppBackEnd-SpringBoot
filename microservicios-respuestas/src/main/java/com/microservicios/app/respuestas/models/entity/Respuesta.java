@@ -14,19 +14,18 @@ import com.microservicios.app.common.alumnos.models.entity.Alumno;
 import com.microservicios.app.common.examenes.models.entity.Pregunta;
 
 @Entity
-@Table(name = "respuestas")
+@Table(name="respuestas")
 public class Respuesta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "texto")
+	
 	private String texto;
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Alumno alumno;
-
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	private Pregunta pregunta;
 
@@ -61,5 +60,6 @@ public class Respuesta {
 	public void setPregunta(Pregunta pregunta) {
 		this.pregunta = pregunta;
 	}
-
+	
+	
 }

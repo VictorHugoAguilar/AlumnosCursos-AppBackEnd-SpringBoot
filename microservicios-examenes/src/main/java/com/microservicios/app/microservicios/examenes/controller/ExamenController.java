@@ -28,22 +28,15 @@ public class ExamenController extends CommonController<Examen, ExamenService> {
 		}
 
 		Optional<Examen> o = service.findById(id);
+
 		if (!o.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 		Examen examenDb = o.get();
 		examenDb.setNombre(examen.getNombre());
 
-		// List<Pregunta> eliminadas = new ArrayList<>();
-		// examenDb.getPreguntas().forEach(pdb -> {
-		// if (!examen.getPreguntas().contains(pdb)) {
-		// eliminadas.add(pdb);
-		// }
-		// });
-		// eliminadas.forEach(p -> examenDb.removePreguntas(p));
-
-		examenDb.getPreguntas().stream().filter(pbd -> !examen.getPreguntas().contains(pbd))
-				.forEach(examenDb::removePreguntas);
+		examenDb.getPreguntas().stream().filter(pdb -> !examen.getPreguntas().contains(pdb))
+				.forEach(examenDb::removePregunta);
 
 		examenDb.setPreguntas(examen.getPreguntas());
 
