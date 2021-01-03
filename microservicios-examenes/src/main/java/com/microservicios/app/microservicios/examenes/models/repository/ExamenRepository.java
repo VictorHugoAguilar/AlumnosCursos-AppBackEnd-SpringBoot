@@ -13,5 +13,9 @@ public interface ExamenRepository extends PagingAndSortingRepository<Examen, Lon
 	public List<Examen> findByNombre(String term);
 	
 	
+	@Query("select e.id from Pregunta p join p.examen e where p.id in ?1 group by e.id")
+	public Iterable<Long> findExamenesIdsConRespuestasByPreguntaIds(Iterable<Long> preguntaIds);
+	
+	
 
 }

@@ -1,7 +1,6 @@
 package com.microservicios.app.respuestas.controllers;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,7 @@ public class RespuestaController {
 	public ResponseEntity<?> crear(@RequestBody Iterable<Respuesta> respuestas) {
 		respuestas = ((List<Respuesta>) respuestas).stream().map(r -> {
 			r.setAlumnoId(r.getAlumno().getId());
+			r.setPreguntaId(r.getPregunta().getId());
 			return r;
 		}).collect(Collectors.toList());
 		Iterable<Respuesta> respuestasDb = service.saveAll(respuestas);
